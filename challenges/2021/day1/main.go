@@ -20,7 +20,39 @@ func main() {
 			counter++
 		}
 	}
-	fmt.Println("Day 1: " + strconv.Itoa(counter))
+	fmt.Println("Day 1 (1/2): " + strconv.Itoa(counter))
+
+	counter2 := 0
+	var inputsEveryThree = make([]int, 0)
+
+	threeCounter := 1
+
+	for i := 0; i < len(input); i++ {
+
+		if threeCounter == 3 {
+			sum, _ := strconv.Atoi(input[i])
+			sum2, _ := strconv.Atoi(input[i-1])
+			sum3, _ := strconv.Atoi(input[i-2])
+
+			add := (sum + sum2 + sum3)
+
+			inputsEveryThree = append(inputsEveryThree, add)
+
+			threeCounter = 0
+			i = i - 2
+		}
+
+		threeCounter++
+
+	}
+
+	for i := 1; i < len(inputsEveryThree); i++ {
+		if inputsEveryThree[i] > inputsEveryThree[i-1] {
+			counter2++
+		}
+	}
+
+	fmt.Println("Day 1 (2/2): " + strconv.Itoa(counter2))
 
 }
 
