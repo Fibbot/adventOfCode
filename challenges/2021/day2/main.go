@@ -86,7 +86,9 @@ func day2() {
 			total2, _ := strconv.Atoi(split[1])
 			total += totals["forward"]
 			totals["forward"] = total
-			totals["depth"] = totals["depth"] * total2
+			if totals["aim"] != 0 {
+				totals["depth"] = totals["depth"] + (totals["aim"] * total2)
+			}
 
 		}
 		if strings.Contains(input[i], "up") {
@@ -102,5 +104,7 @@ func day2() {
 
 	}
 	fmt.Printf("PART2: Total depth = %d\n", totals["depth"])
-	fmt.Printf("PART2:Total horz position = %d\n", (totals["down"]-totals["up"])*totals["forward"])
+	fmt.Printf("PART2: Total aim = %d\n", totals["aim"])
+	fmt.Printf("PART2:Total horz position = %d\n", totals["forward"])
+	fmt.Printf("Answer? : %d", (totals["depth"] * totals["forward"]))
 }
