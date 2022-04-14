@@ -5,42 +5,43 @@ import (
 	"fmt"
 	"log"
 	"os"
+	"strconv"
 )
 
 func main() {
-	var words = "./input2.txt"
+	var words = "./input.txt"
 	input := importFile(words)
 
-	// need 2 arrays for epsilon and gamma
-	// input array already made
-	// a map to count total #'s of 1's and 0's  countThis["0s"] .. countThis["1s"]
-	// one last array of the number totals
-	// convert binary to decimal (probably just import something for this ;D)
-	var gammaBin = make([]string, 0)
+	gammaBin := ""
+	epsilonBin := ""
 
-	for i := 0; i < len(input); i++ {
-		// input[i][i : i+1]
+	for i := 0; i < len(input[0]); i++ {
 		numZeros := 0
 		numOnes := 0
-		for j := 0; j < len(input[i]); j++ {
-
-			if input[i][j:j+1] == "0" {
-
+		for j := 0; j < len(input); j++ {
+			if input[j][i:i+1] == "0" {
 				numZeros++
 			}
-			if input[i][j:j+1] == "1" {
-
+			if input[j][i:i+1] == "1" {
 				numOnes++
 			}
 		}
 		if numZeros > numOnes {
-			gammaBin = append(gammaBin, "0")
+			gammaBin += "0"
+			epsilonBin += "1"
 		} else {
-			gammaBin = append(gammaBin, "1")
+			gammaBin += "1"
+			epsilonBin += "0"
 		}
+
 	}
 
-	fmt.Printf("%s", gammaBin)
+	gammaDec, _ := strconv.ParseInt(gammaBin, 2, 64)
+	epsilonDec, _ := strconv.ParseInt(epsilonBin, 2, 64)
+	fmt.Printf("%d\n", gammaDec)
+	fmt.Printf("%d\n", epsilonDec)
+	fmt.Printf("Part 1 answer: %d", gammaDec*epsilonDec)
+
 	day2()
 }
 
@@ -67,5 +68,29 @@ func importFile(input string) []string {
 }
 
 func day2() {
+	var words = "./input2.txt"
+	input := importFile(words)
 
+	oxyBin := ""
+	c02Bin := ""
+
+	for i := 0; i < len(input[0]); i++ {
+		numZeros := 0
+		numOnes := 0
+		for j := 0; j < len(input); j++ {
+			if input[j][i:i+1] == "0" {
+				numZeros++
+			}
+			if input[j][i:i+1] == "1" {
+				numOnes++
+			}
+		}
+
+	}
+
+	gammaDec, _ := strconv.ParseInt(oxyBin, 2, 64)
+	epsilonDec, _ := strconv.ParseInt(c02Bin, 2, 64)
+	fmt.Printf("%d\n", gammaDec)
+	fmt.Printf("%d\n", epsilonDec)
+	fmt.Printf("Part 1 answer: %d", gammaDec*epsilonDec)
 }
